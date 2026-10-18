@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json.schemastore.org/package",
+  "name": "@mark1russell7/lag-hud",
+  "version": "0.1.0",
+  "description": "An in-memory meter, a fan-out and a display without a framework for the lag monitors of @mark1russell7/lag.",
+  "keywords": [
+    "lag",
+    "performance",
+    "main-thread",
+    "opentelemetry",
+    "meter",
+    "hud",
+    "typescript"
+  ],
+  "homepage": "https://github.com/mark1russell7/lag-hud#readme",
+  "bugs": {
+    "url": "https://github.com/mark1russell7/lag-hud/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mark1russell7/lag-hud.git",
+    "directory": "packages/hud"
+  },
+  "license": "MIT",
+  "author": "Mark Russell (https://github.com/mark1russell7)",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "build",
+    "src",
+    "!src/**/*.test.ts"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "main": "./build/index.js",
+    "types": "./build/index.d.ts",
+    "exports": {
+      ".": {
+        "types": "./build/index.d.ts",
+        "default": "./build/index.js"
+      },
+      "./package.json": "./package.json"
+    }
+  },
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.test.json"
+  },
+  "devDependencies": {
+    "@mark1russell7/cue": "github:mark1russell7/cue",
+    "@types/node": "^26.6.4",
+    "tsdown": "^0.23.1",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.3"
+  }
+}
