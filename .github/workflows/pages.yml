@@ -17,11 +17,11 @@ on:
 
 permissions: {}
 
-# One deployment at a time. A newer push cancels a deployment that waits.
-# Each pull request has its own group, so it does not cancel a deployment.
+# One deployment at a time. A deployment in progress ends, and GitHub keeps only the newest deployment that waits.
+# Each pull request has its own group, and a newer push cancels its run.
 concurrency:
   group: pages-${{ github.event_name == 'pull_request' && github.ref || 'deploy' }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   pages:
@@ -43,8 +43,9 @@ jobs:
       out: packages/site/dist
       env: '{"SITE_BASE": "/${{ github.event.repository.name }}"}'
       # The site-pages action adds releases/, status/, data/releases.json and data/status.json to the built site.
-      # The repository has no docs/ROADMAP.md, so the Status page shows the open pull requests and issues.
+      # The Status page shows the items of docs/ROADMAP.md, and the open pull requests and issues.
       site-pages: true
+      roadmap: docs/ROADMAP.md
       packages: "@mark1russell7/lag-hud"
       site-name: lag-hud
       # The site check: a browser opens each page at 360, 400 and 1280 px, in light and dark, before the deploy.
