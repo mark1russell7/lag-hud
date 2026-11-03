@@ -70,6 +70,15 @@ for (const m of FOCUS_METRICS) {
   rowsBox.append(row);
 }
 
+// The axis: the labels at their places on the log scale
+const axis = byId("axis");
+for (const [ms, text] of [[0.1, "0.1 ms"], [1, "1 ms"], [10, "10 ms"], [100, "100 ms"], [1000, "1 s"]] as const) {
+  axis.append(h("span", { style: `left:${scalePosition(ms) * 100}%` }, text));
+}
+
+// The value text breaks only between two values
+const nb = (name: string, ms: number): string => `${name}\u00a0${formatMs(ms).replace(" ", "\u00a0")}`;
+
 function drawChart(): void {
   if (!session) return;
   for (const r of chartRows(session.focus.snapshot(), FOCUS_METRICS)) {
@@ -81,7 +90,7 @@ function drawChart(): void {
     el.p50.hidden = r.count === 0;
     el.row.dataset["max"] = String(r.max);
     el.row.dataset["long"] = String(r.long);
-    el.text.textContent = r.count === 0 ? "no values yet" : `p50 ${formatMs(r.p50)} · p95 ${formatMs(r.p95)} · max ${formatMs(r.max)}`;
+    el.text.textContent = r.count === 0 ? "no values yet" : `${nb("p50", r.p50)} · ${nb("p95", r.p95)} · ${nb("max", r.max)}`;
     el.row.title = `${r.label}: ${r.about} ${r.count} values.`;
   }
 }

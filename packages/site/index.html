@@ -40,7 +40,9 @@
             The dark panel in the window is the real display of <code>lag-hud</code>. The <code>lag</code> monitors measure this tab, and the
             panel shows their values. Block the main thread with a button. Then the values change.
           </p>
+        </div>
 
+        <div class="actions">
           <div class="loads" id="loads" role="group" aria-label="Block the main thread of this page"></div>
           <p class="load-status" id="load-status" role="status" aria-live="polite">The monitors operate. Select a button to block the main thread.</p>
 
@@ -92,7 +94,7 @@
             <span><i class="sw p50"></i>p50</span><span><i class="sw p95"></i>p95</span><span><i class="sw max"></i>max</span>
           </div>
           <div class="rows" id="rows"></div>
-          <div class="axis" aria-hidden="true"><span>0.1 ms</span><span>1 ms</span><span>10 ms</span><span>100 ms</span><span>1 s</span></div>
+          <div class="row axis-row" aria-hidden="true"><span class="spacer"></span><span class="axis" id="axis"></span><span class="spacer"></span></div>
         </div>
       </section>
 

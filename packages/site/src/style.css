@@ -216,8 +216,22 @@ main {
 @media (min-width: 960px) {
   .hero {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-    gap: 2.5rem;
+    grid-template-areas: "intro window" "actions window";
+    grid-template-rows: auto 1fr;
+    gap: 0 2.5rem;
     padding-top: 2.5rem;
+  }
+
+  .intro {
+    grid-area: intro;
+  }
+
+  .actions {
+    grid-area: actions;
+  }
+
+  .window {
+    grid-area: window;
   }
 }
 
@@ -532,6 +546,7 @@ h1 {
 .two {
   display: grid;
   gap: 1rem;
+  align-items: start;
 }
 
 @media (min-width: 860px) {
@@ -582,7 +597,7 @@ h1 {
 
 .row {
   display: grid;
-  grid-template-columns: 11rem minmax(0, 1fr) 17rem;
+  grid-template-columns: 11rem minmax(0, 1fr) 20rem;
   align-items: center;
   gap: 0.75rem;
   padding: 0.35rem 0.25rem;
@@ -660,7 +675,7 @@ h1 {
 
 .rval {
   font-family: var(--mono);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--muted);
 }
 
@@ -668,13 +683,26 @@ h1 {
   color: var(--fg);
 }
 
+.axis-row:hover {
+  background: none;
+}
+
 .axis {
-  display: flex;
-  justify-content: space-between;
-  margin: 0.4rem 0 0 calc(11rem + 1rem);
-  margin-right: calc(17rem + 1rem);
+  position: relative;
+  height: 1.2rem;
   font-size: 0.75rem;
   color: var(--muted);
+}
+
+.axis span {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.axis span:first-child {
+  transform: none;
 }
 
 @media (max-width: 760px) {
@@ -688,8 +716,12 @@ h1 {
     justify-content: space-between;
   }
 
+  .axis-row .spacer {
+    display: none;
+  }
+
   .axis {
-    margin: 0.4rem 0 0;
+    margin: 0 0.6rem;
   }
 }
 
