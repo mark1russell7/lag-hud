@@ -7,18 +7,33 @@ export interface DisplayElement {
   remove(): void;
 }
 
-/** The parts of a DOM document that the display uses. */
-export interface DisplayDocument {
-  createElement(tag: "pre"): DisplayElement;
-  body: { append(element: DisplayElement): void } | null;
+/**
+ * The element that `globalThis.document` makes. In a program with the DOM types, it is `HTMLElement`. In a program
+ * with no DOM types, it is `DisplayElement`.
+ */
+export type DefaultDisplayElement = typeof globalThis extends {
+  document: { createElement(tag: "pre"): infer P extends DisplayElement };
+}
+  ? P
+  : DisplayElement;
+
+/** The parent of the display: an object that appends an element. A DOM element is a parent. */
+export interface DisplayParent<E extends DisplayElement = DisplayElement> {
+  append(element: E): void;
 }
 
-/** The options of `mountLagHud`. */
-export interface LagHudDisplayOptions {
+/** The parts of a DOM document that the display uses. A DOM `Document` is a `DisplayDocument`. */
+export interface DisplayDocument<E extends DisplayElement = DisplayElement> {
+  createElement(tag: "pre"): E;
+  body: DisplayParent<NoInfer<E>> | null;
+}
+
+/** The options of `mountLagHud`. The type `E` is the element of the display. */
+export interface LagHudDisplayOptions<E extends DisplayElement = DefaultDisplayElement> {
   /** The document. The default is `globalThis.document`. */
-  document?: DisplayDocument;
-  /** The parent of the display. The default is the body of the document. */
-  parent?: { append(element: DisplayElement): void };
+  document?: DisplayDocument<E>;
+  /** The parent of the display, for example a DOM element. The default is the body of the document. */
+  parent?: DisplayParent<NoInfer<E>>;
   /** The first line of the display. The default is `lag`. */
   title?: string;
   /** The corner of the screen. The default is `bottom-right`. */
@@ -26,9 +41,9 @@ export interface LagHudDisplayOptions {
 }
 
 /** A mounted display. */
-export interface LagHudDisplay {
+export interface LagHudDisplay<E extends DisplayElement = DisplayElement> {
   /** The element of the display. */
-  readonly element: DisplayElement;
+  readonly element: E;
   /** This method removes the display, and stops its updates. */
   stop(): void;
 }
@@ -40,7 +55,7 @@ export function lagHudText(hud: Pick<HudMeter, "snapshot">, title = "lag"): stri
   return [title, ...lines].join("\n");
 }
 
-const CORNERS: Record<NonNullable<LagHudDisplayOptions["corner"]>, string> = {
+const CORNERS: Record<NonNullable<LagHudDisplayOptions<DisplayElement>["corner"]>, string> = {
   "top-left": "top:8px;left:8px",
   "top-right": "top:8px;right:8px",
   "bottom-left": "bottom:8px;left:8px",
@@ -59,8 +74,11 @@ const CORNERS: Record<NonNullable<LagHudDisplayOptions["corner"]>, string> = {
  * // later: display.stop();
  * ```
  */
-export function mountLagHud(hud: HudMeter, options: LagHudDisplayOptions = {}): LagHudDisplay {
-  const doc = options.document ?? (globalThis as unknown as { document?: DisplayDocument }).document;
+export function mountLagHud<E extends DisplayElement = DefaultDisplayElement>(
+  hud: HudMeter,
+  options: LagHudDisplayOptions<E> = {},
+): LagHudDisplay<E> {
+  const doc = options.document ?? (globalThis as unknown as { document?: DisplayDocument<E> }).document;
   if (!doc) throw new Error("mountLagHud needs a document");
   const element = doc.createElement("pre");
   element.style.cssText = [
@@ -81,7 +99,7 @@ export function mountLagHud(hud: HudMeter, options: LagHudDisplayOptions = {}): 
     element.textContent = lagHudText(hud, options.title);
   };
   render();
-  const parent = options.parent ?? doc.body;
+  const parent: DisplayParent<E> | null = options.parent ?? doc.body;
   if (!parent) throw new Error("mountLagHud needs a parent: the document has no body");
   parent.append(element);
   const unsubscribe = hud.onChange(render);

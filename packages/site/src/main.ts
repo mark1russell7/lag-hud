@@ -1,5 +1,5 @@
 // The page: it starts the monitors, mounts the real HUD in the model window, and connects the buttons and the views.
-import { lagHudText, mountLagHud, type DisplayElement, type LagHudDisplay, type LagHudDisplayOptions } from "@mark1russell7/lag-hud";
+import { lagHudText, mountLagHud, type LagHudDisplay, type LagHudDisplayOptions } from "@mark1russell7/lag-hud";
 import { chartRows, formatMs, LONG_TASK_MS, scalePosition } from "./chart.ts";
 import { byId, h, Segmented, setupTheme } from "./chrome.ts";
 import { FOCUS_METRICS } from "./focus.ts";
@@ -29,7 +29,7 @@ let place: Place = "window";
 let corner: Corner = "bottom-right";
 let tickMs = 1000;
 let session: Session | undefined;
-let display: LagHudDisplay | undefined;
+let display: LagHudDisplay<HTMLElement> | undefined;
 let unsubscribe: Array<() => void> = [];
 let notices: Notice[] = [];
 let logs = 0;
@@ -40,10 +40,8 @@ function mountHud(): void {
   display?.stop();
   if (!session) return;
   const target = place === "window" ? stage : document.body;
-  // The parent type of the display is not the DOM type: the display element is a DOM element in a browser.
-  const parent = { append: (element: DisplayElement) => target.append(element as unknown as Node) };
-  display = mountLagHud(session.focus, { parent, corner, title: HUD_TITLE });
-  const el = display.element as unknown as HTMLElement;
+  display = mountLagHud(session.focus, { parent: target, corner, title: HUD_TITLE });
+  const el = display.element;
   el.id = "hud";
   el.dataset["place"] = place;
   el.setAttribute("aria-label", "The HUD of lag-hud");

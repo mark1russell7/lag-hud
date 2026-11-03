@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
-import { createHudMeter, lagHudText, mountLagHud, type DisplayDocument, type DisplayElement } from "./index.ts";
+import { describe, expect, expectTypeOf, it } from "vitest";
+import { createHudMeter, lagHudText, mountLagHud, type DisplayDocument, type DisplayElement, type HudMeter, type LagHudDisplay } from "./index.ts";
 
 /** A document of plain objects: the display needs only a few parts of the DOM. */
 function fakeDocument() {
@@ -44,5 +44,18 @@ describe("the display", () => {
   it("refuses a page without a document", () => {
     // The test runs in Node: globalThis has no document
     expect(() => mountLagHud(createHudMeter())).toThrow(/document/);
+  });
+});
+
+describe("the types of mountLagHud", () => {
+  // These calls are never made: the type check examines them. This package has no DOM types, so the element is a
+  // DisplayElement. The site package checks the DOM types.
+  const plain = (hud: HudMeter, doc: DisplayDocument): void => {
+    expectTypeOf(mountLagHud(hud, { document: doc }).element).toEqualTypeOf<DisplayElement>();
+    expectTypeOf(mountLagHud(hud, { parent: { append: (_element: DisplayElement) => {} } })).toEqualTypeOf<LagHudDisplay>();
+  };
+
+  it("accepts a document and a parent of plain objects", () => {
+    expect(plain).toBeTypeOf("function");
   });
 });

@@ -17,4 +17,13 @@ export {
   type LagStat,
   type Meter,
 } from "./meter.ts";
-export { lagHudText, mountLagHud, type DisplayDocument, type DisplayElement, type LagHudDisplay, type LagHudDisplayOptions } from "./display.ts";
+export {
+  lagHudText,
+  mountLagHud,
+  type DefaultDisplayElement,
+  type DisplayDocument,
+  type DisplayElement,
+  type DisplayParent,
+  type LagHudDisplay,
+  type LagHudDisplayOptions,
+} from "./display.ts";
