@@ -7,6 +7,7 @@ import { LOADS, runLoad, type LoadId } from "./loads.ts";
 import { pushNotice, type Notice } from "./notices.ts";
 import { startSession, type Session } from "./session.ts";
 import { SNIPPETS, type SnippetId } from "./snippets.ts";
+import "@mark1russell7/site-pages/scroll-cue.css";
 import "./style.css";
 
 declare const __BUILD__: { sha: string };

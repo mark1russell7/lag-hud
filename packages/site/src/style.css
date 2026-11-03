@@ -778,7 +778,9 @@ pre {
   line-height: 1.5;
 }
 
+/* The class scroll-cue of site-pages gives the background and a shade at each edge that has more text. */
 pre.all {
+  --scroll-cue-bg: var(--sunken);
   max-height: 22rem;
   overflow: auto;
   font-size: 0.72rem;
