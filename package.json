@@ -12,15 +12,27 @@
     "template": "template repo",
     "test": "pnpm -r run test",
     "typecheck": "pnpm -r run typecheck",
-    "lint:ste": "ste-lint"
+    "lint:ste": "ste-lint",
+    "check:conventions": "conventions check"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",
-    "@mark1russell7/cue": "github:mark1russell7/cue",
-    "@mark1russell7/ste-lint": "github:mark1russell7/ste-lint",
+    "@mark1russell7/conventions": "^0.22.0",
+    "@mark1russell7/cue": "github:mark1russell7/cue#0584cc4212b5ef261a4eefc0735bc0309d6aa073",
+    "@mark1russell7/ste-lint": "github:mark1russell7/ste-lint#f597d6c1e09bcfcb487bb575825d6d5f29e9e0c7",
     "@mark1russell7/template-cli": "^0.1.2",
     "publint": "^0.3.25",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2"
+  },
+  "conventions": {
+    "rules": {
+      "typed-scripts": {
+        "ignore": [
+          "packages/site/check-probe.js"
+        ],
+        "reason": "packages/site/check-probe.js uses the global helpers of the site check of site-pages, and this repository has no type declarations for them yet."
+      }
+    }
   }
 }

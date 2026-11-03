@@ -15,7 +15,7 @@
     "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.test.json"
   },
   "devDependencies": {
-    "@mark1russell7/cue": "github:mark1russell7/cue",
+    "@mark1russell7/cue": "github:mark1russell7/cue#4923f385b35526bad53e0ac58be9004c48b3098a",
     "@mark1russell7/site-pages": "^0.1.8",
     "@types/node": "^26.6.4",
     "typescript": "^7.0.2",
