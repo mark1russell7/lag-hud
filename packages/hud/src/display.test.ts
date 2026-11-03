@@ -19,7 +19,7 @@ describe("the display", () => {
     const hud = createHudMeter({ setTimer: () => undefined });
     expect(lagHudText(hud)).toBe("lag\nno samples yet");
     hud.meter.createCounter("c", { unit: "{x}" }).add(1);
-    expect(lagHudText(hud, "Graph")).toBe("Graph\nc  total 1  (n=1)");
+    expect(lagHudText(hud, "dev")).toBe("dev\nc  total 1  (n=1)");
   });
 
   it("mounts a fixed panel, updates it at each change notice, and removes it at stop", () => {

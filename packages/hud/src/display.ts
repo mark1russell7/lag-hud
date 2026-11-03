@@ -60,7 +60,7 @@ const CORNERS: Record<NonNullable<LagHudDisplayOptions["corner"]>, string> = {
  * ```
  */
 export function mountLagHud(hud: HudMeter, options: LagHudDisplayOptions = {}): LagHudDisplay {
-  const doc = options.document ?? (globalThis as { document?: DisplayDocument }).document;
+  const doc = options.document ?? (globalThis as unknown as { document?: DisplayDocument }).document;
   if (!doc) throw new Error("mountLagHud needs a document");
   const element = doc.createElement("pre");
   element.style.cssText = [
