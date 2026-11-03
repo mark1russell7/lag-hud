@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>lag-hud: a live HUD of the main thread</title>
+    <meta name="description" content="The HUD of lag-hud, live in your browser. Block the main thread of the page. Then the values of the lag monitors change." />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23141821'/%3E%3Crect x='6' y='7' width='20' height='18' rx='3' fill='none' stroke='%2341d1a7' stroke-width='2'/%3E%3Cpath d='M9 19l4-4 3 3 6-7' fill='none' stroke='%23ffb547' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+    <script>
+      // The saved theme applies before the first paint, so a dark page does not flash white.
+      try {
+        const t = localStorage.getItem("lag-hud-theme");
+        if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#demo">Skip to the demo</a>
+    <header class="top">
+      <div class="top-in">
+        <a class="wordmark" href="./"><span class="mark" aria-hidden="true"></span>lag-hud</a>
+        <nav class="links" aria-label="Site">
+          <a href="#use">Use it</a>
+          <a href="#packages">Packages</a>
+          <a href="releases/">Releases</a>
+          <a href="status/">Status</a>
+          <a href="https://github.com/mark1russell7/lag-hud">GitHub</a>
+          <button type="button" class="theme" id="theme">Theme: auto</button>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section id="demo" class="hero" aria-labelledby="hero-title">
+        <div class="intro">
+          <p class="eyebrow">An add-on for <a href="https://mark1russell7.github.io/lag/">lag</a></p>
+          <h1 id="hero-title">A live HUD of the main thread</h1>
+          <p class="lead">
+            The dark panel in the window is the real display of <code>lag-hud</code>. The <code>lag</code> monitors measure this tab, and the
+            panel shows their values. Block the main thread with a button. Then the values change.
+          </p>
+        </div>
+
+        <div class="actions">
+          <div class="loads" id="loads" role="group" aria-label="Block the main thread of this page"></div>
+          <p class="load-status" id="load-status" role="status" aria-live="polite">The monitors operate. Select a button to block the main thread.</p>
+
+          <div class="controls">
+            <div class="field">
+              <span class="label" id="place-label">HUD position</span>
+              <div class="seg" role="radiogroup" aria-labelledby="place-label" id="place"></div>
+            </div>
+            <div class="field">
+              <span class="label" id="corner-label">Corner</span>
+              <div class="seg corners" role="radiogroup" aria-labelledby="corner-label" id="corner"></div>
+            </div>
+            <div class="field">
+              <span class="label" id="tick-label">Update rate</span>
+              <div class="seg" role="radiogroup" aria-labelledby="tick-label" id="tick"></div>
+            </div>
+          </div>
+        </div>
+
+        <figure class="window" aria-labelledby="window-caption">
+          <div class="titlebar">
+            <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="wtitle" id="window-caption">Your app, in this tab</span>
+            <span class="state" id="state"><span class="state-dot" aria-hidden="true"></span><span id="state-text">Measuring</span></span>
+          </div>
+          <div class="stage" id="stage">
+            <div class="lanes" aria-label="Two dots: the main thread moves the first dot, and the compositor moves the second dot">
+              <div class="lane"><span class="lane-name">Main thread</span><span class="track"><span class="runner" id="js-dot"><span class="dot js"></span></span></span></div>
+              <div class="lane"><span class="lane-name">Compositor</span><span class="track"><span class="runner css"><span class="dot"></span></span></span></div>
+            </div>
+            <div class="skeleton" aria-hidden="true">
+              <span class="bone"></span><span class="bone"></span><span class="bone"></span><span class="bone"></span>
+            </div>
+            <p class="stage-note" id="stage-note" hidden>The HUD is in a corner of the page now.</p>
+          </div>
+        </figure>
+      </section>
+
+      <section id="chart" class="section" aria-labelledby="chart-title">
+        <div class="section-head">
+          <h2 id="chart-title">The same values, as a chart</h2>
+          <p class="hint">
+            <code>snapshot()</code> of the HUD meter gives these values. The scale is logarithmic, from 0.1 ms to 2 s. The line marks 50 ms, the limit
+            of a long task.
+          </p>
+        </div>
+        <div class="card">
+          <div class="legend" aria-hidden="true">
+            <span><i class="sw p50"></i>p50</span><span><i class="sw p95"></i>p95</span><span><i class="sw max"></i>max</span>
+          </div>
+          <div class="rows" id="rows"></div>
+          <div class="row axis-row" aria-hidden="true"><span class="spacer"></span><span class="axis" id="axis"></span><span class="spacer"></span></div>
+        </div>
+      </section>
+
+      <section class="section two" aria-label="More views of the values">
+        <div class="card">
+          <h2>Values of 50 ms or more</h2>
+          <p class="hint">
+            <code>fanOutMeter</code> gives each value to three meters: the HUD, the meter of all metrics and this list. The list shows each value of 50
+            ms or more, at the time that <code>lag</code> records it.
+          </p>
+          <ol class="notices" id="notices"><li class="empty">No value of 50 ms or more yet.</li></ol>
+        </div>
+        <div class="card">
+          <h2>All the metrics of lag</h2>
+          <p class="hint">
+            A second HUD meter gets all <span id="metric-count">43</span> metrics. <code>lagHudText</code> gives its text. The HUD in the window
+            shows only six of them, under short names.
+          </p>
+          <pre class="all" id="all" tabindex="0" aria-label="The text of the HUD of all the metrics"></pre>
+          <p class="hint" id="log-line"></p>
+        </div>
+      </section>
+
+      <section id="use" class="section" aria-labelledby="use-title">
+        <div class="section-head">
+          <h2 id="use-title">Use it</h2>
+          <p class="hint">
+            The package has one display. It uses only the DOM, so it works in a page of each framework. These samples mount it in the life cycle of
+            each framework.
+          </p>
+        </div>
+        <div class="card">
+          <pre class="install"><code>npm install @mark1russell7/lag-hud @mark1russell7/lag</code></pre>
+          <div class="seg tabs" role="radiogroup" aria-label="Framework" id="snippet-tabs"></div>
+          <pre class="code" id="snippet" tabindex="0"><code></code></pre>
+        </div>
+      </section>
+
+      <section id="packages" class="section" aria-labelledby="packages-title">
+        <h2 id="packages-title">Packages</h2>
+        <div class="card table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Package</th><th scope="col">What it does</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="https://github.com/mark1russell7/lag-hud/tree/main/packages/hud"><code>@mark1russell7/lag-hud</code></a></td>
+                <td>An in-memory meter for the <code>lag</code> monitors, a fan-out to more meters (for example OpenTelemetry), and a display without a framework</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="development" class="section" aria-labelledby="dev-title">
+        <h2 id="dev-title">Development</h2>
+        <div class="card">
+          <pre class="code"><code>pnpm install
+pnpm typecheck
+pnpm test
+pnpm lint:ste</code></pre>
+          <p class="hint">
+            The site is in <code>packages/site</code>. <code>pnpm --filter @lag-hud/site run dev</code> starts it.
+            <a href="https://github.com/mark1russell7/lag-hud/blob/main/RELEASING.md"><code>RELEASING.md</code></a> tells how a release works.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <p>
+        <a href="https://github.com/mark1russell7/lag-hud">mark1russell7/lag-hud</a> · MIT · build <code id="build"></code> · The monitors operate only in this
+        tab, and the page sends no data.
+      </p>
+    </footer>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>

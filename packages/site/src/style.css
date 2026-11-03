@@ -1,0 +1,834 @@
+/* The style of the site: tokens for light and dark, the header, the hero with the model window, the chart and the sections. */
+
+:root {
+  color-scheme: light dark;
+  --bg: #f3f4f7;
+  --surface: #ffffff;
+  --sunken: #eceef3;
+  --fg: #12151d;
+  --muted: #586073;
+  --rule: #d9dde5;
+  --accent: #0b7d61;
+  --accent-ink: #ffffff;
+  --link: #0a6e56;
+  --warn: #a14a00;
+  --stage: #e7eaf0;
+  --stage-line: #d6dbe4;
+  --bone: #cfd5df;
+  --c-max: #b9e4d6;
+  --c-p95: #13a07d;
+  --c-p50: #063f31;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "Cascadia Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+  --width: 72rem;
+  --radius: 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1016;
+    --surface: #151922;
+    --sunken: #1c212c;
+    --fg: #e7eaf1;
+    --muted: #98a0b3;
+    --rule: #2a3040;
+    --accent: #41d1a7;
+    --accent-ink: #062a20;
+    --link: #6fe0bd;
+    --warn: #ffb547;
+    --stage: #1a1f2a;
+    --stage-line: #232937;
+    --bone: #2c3343;
+    --c-max: #1f5245;
+    --c-p95: #41d1a7;
+    --c-p50: #e7fff6;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0d1016;
+  --surface: #151922;
+  --sunken: #1c212c;
+  --fg: #e7eaf1;
+  --muted: #98a0b3;
+  --rule: #2a3040;
+  --accent: #41d1a7;
+  --accent-ink: #062a20;
+  --link: #6fe0bd;
+  --warn: #ffb547;
+  --stage: #1a1f2a;
+  --stage-line: #232937;
+  --bone: #2c3343;
+  --c-max: #1f5245;
+  --c-p95: #41d1a7;
+  --c-p50: #e7fff6;
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 16px/1.55 var(--font);
+  overflow-wrap: break-word;
+}
+
+a {
+  color: var(--link);
+  text-underline-offset: 2px;
+}
+
+code,
+pre {
+  font-family: var(--mono);
+}
+
+code {
+  font-size: 0.9em;
+}
+
+:not(pre) > code {
+  background: var(--sunken);
+  border-radius: 4px;
+  padding: 0 0.25em;
+}
+
+h1,
+h2 {
+  line-height: 1.2;
+  margin: 0 0 0.5rem;
+}
+
+h2 {
+  font-size: 1.25rem;
+}
+
+.skip {
+  position: absolute;
+  left: -999px;
+  top: 8px;
+}
+
+.skip:focus {
+  left: 8px;
+  z-index: 10;
+  background: var(--surface);
+  padding: 4px 8px;
+}
+
+/* The header */
+.top {
+  background: var(--surface);
+  border-bottom: 1px solid var(--rule);
+}
+
+.top-in {
+  max-width: var(--width);
+  margin: 0 auto;
+  padding: 0.6rem 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 1.25rem;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-right: auto;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.mark {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: #141821;
+  box-shadow: inset 0 0 0 2px #41d1a7;
+  position: relative;
+}
+
+.mark::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  top: 10px;
+  height: 2px;
+  background: #ffb547;
+  border-radius: 1px;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 1rem;
+  font-size: 0.95rem;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.theme {
+  background: var(--sunken);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 0.15rem 0.7rem;
+  font-size: 0.875rem;
+}
+
+main {
+  max-width: var(--width);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* The hero: the intro with the buttons, and the model window with the real HUD */
+.hero {
+  display: grid;
+  gap: 1.5rem;
+  padding: 1.75rem 0 1rem;
+  align-items: start;
+}
+
+@media (min-width: 960px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    grid-template-areas: "intro window" "actions window";
+    grid-template-rows: auto 1fr;
+    gap: 0 2.5rem;
+    padding-top: 2.5rem;
+  }
+
+  .intro {
+    grid-area: intro;
+  }
+
+  .actions {
+    grid-area: actions;
+  }
+
+  .window {
+    grid-area: window;
+  }
+}
+
+.eyebrow {
+  margin: 0 0 0.4rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+h1 {
+  font-size: clamp(1.85rem, 4.2vw, 2.75rem);
+  letter-spacing: -0.02em;
+}
+
+.lead {
+  margin: 0 0 1.25rem;
+  color: var(--muted);
+  font-size: 1.05rem;
+  max-width: 36rem;
+}
+
+.loads {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+  max-width: 30rem;
+}
+
+.load {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border: 0;
+  border-radius: 8px;
+  padding: 0.7rem 0.8rem;
+  font-weight: 650;
+  min-height: 44px;
+}
+
+.load:hover {
+  filter: brightness(1.08);
+}
+
+.load:disabled {
+  opacity: 0.55;
+  cursor: progress;
+}
+
+.load:focus-visible,
+.seg button:focus-visible,
+.theme:focus-visible {
+  outline: 3px solid var(--link);
+  outline-offset: 2px;
+}
+
+.load-status {
+  min-height: 3em;
+  margin: 0.6rem 0 1rem;
+  font-size: 0.925rem;
+  color: var(--muted);
+  max-width: 30rem;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem 1.5rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.seg {
+  display: inline-flex;
+  flex-wrap: wrap;
+  background: var(--sunken);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 2px;
+  gap: 2px;
+}
+
+.seg button {
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.9rem;
+  min-height: 34px;
+}
+
+.seg button[aria-checked="true"] {
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.15);
+  font-weight: 650;
+}
+
+.corners button {
+  min-width: 36px;
+}
+
+/* The model window */
+.window {
+  margin: 0;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  box-shadow: 0 12px 32px -18px rgb(0 0 0 / 0.35);
+  overflow: hidden;
+}
+
+.titlebar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.85rem;
+}
+
+.dots {
+  display: inline-flex;
+  gap: 5px;
+}
+
+.dots i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--rule);
+}
+
+.wtitle {
+  color: var(--muted);
+  margin-right: auto;
+  min-width: 0;
+}
+
+.state {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.state-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c-p95);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-p95) 25%, transparent);
+}
+
+/* The transform makes the stage the containing block of the fixed HUD. Thus the HUD stays in the window. */
+.stage {
+  position: relative;
+  transform: translateZ(0);
+  min-height: 300px;
+  padding: 1rem;
+  background-color: var(--stage);
+  background-image:
+    linear-gradient(var(--stage-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--stage-line) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.lanes {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.lane {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.track {
+  position: relative;
+  height: 14px;
+  border-radius: 7px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+}
+
+.runner {
+  position: absolute;
+  inset: 0 14px 0 0;
+  transform: translateX(calc(var(--x, 0) * 100%));
+}
+
+.runner.css {
+  animation: slide 1.6s linear infinite alternate;
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .runner.css {
+    animation: none;
+  }
+}
+
+.dot {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--c-p95);
+}
+
+.dot.js {
+  background: var(--warn);
+}
+
+.skeleton {
+  display: grid;
+  gap: 0.6rem;
+  max-width: 70%;
+}
+
+.bone {
+  display: block;
+  height: 12px;
+  border-radius: 6px;
+  background: var(--bone);
+}
+
+.bone:nth-child(1) {
+  width: 85%;
+}
+
+.bone:nth-child(2) {
+  width: 65%;
+}
+
+.bone:nth-child(3) {
+  width: 75%;
+}
+
+.bone:nth-child(4) {
+  width: 45%;
+}
+
+.stage-note {
+  margin: 1.25rem 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* The HUD keeps its own style. On a small screen, a smaller font keeps the longest line in the window. */
+@media (max-width: 460px) {
+  .stage > pre {
+    font-size: 9.5px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .stage > pre {
+    font-size: 8.5px !important;
+  }
+}
+
+/* The sections */
+.section {
+  padding: 1.25rem 0;
+}
+
+.section-head .hint {
+  max-width: 48rem;
+}
+
+.hint {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0 0 0.75rem;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 1rem;
+  min-width: 0;
+}
+
+.two {
+  display: grid;
+  gap: 1rem;
+  align-items: start;
+}
+
+@media (min-width: 860px) {
+  .two {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+/* The chart */
+.legend {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.sw {
+  display: inline-block;
+  width: 14px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+.sw.max {
+  background: var(--c-max);
+}
+
+.sw.p95 {
+  background: var(--c-p95);
+}
+
+.sw.p50 {
+  width: 4px;
+  background: var(--c-p50);
+}
+
+.rows {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 11rem minmax(0, 1fr) 20rem;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.35rem 0.25rem;
+  border-radius: 6px;
+}
+
+.row:hover {
+  background: var(--sunken);
+}
+
+.rname {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.rname code {
+  font-weight: 650;
+}
+
+.rmon {
+  color: var(--muted);
+  font-size: 0.75rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rtrack {
+  position: relative;
+  height: 12px;
+  background: var(--sunken);
+  border-radius: 6px;
+}
+
+.rtrack::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  left: calc(var(--long) * 100%);
+  border-left: 2px dashed var(--warn);
+}
+
+.bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 6px;
+  width: 0;
+  transition: width 0.3s ease-out;
+}
+
+.bar.max {
+  background: var(--c-max);
+}
+
+.bar.p95 {
+  background: var(--c-p95);
+  top: 2px;
+  bottom: 2px;
+}
+
+.tick {
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  width: 3px;
+  margin-left: -1px;
+  border-radius: 2px;
+  background: var(--c-p50);
+}
+
+.rval {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.row[data-long="true"] .rval {
+  color: var(--fg);
+}
+
+.axis-row:hover {
+  background: none;
+}
+
+.axis {
+  position: relative;
+  height: 1.2rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.axis span {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.axis span:first-child {
+  transform: none;
+}
+
+@media (max-width: 760px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.3rem;
+    padding: 0.5rem 0.25rem;
+  }
+
+  .rname {
+    justify-content: space-between;
+  }
+
+  .axis-row .spacer {
+    display: none;
+  }
+
+  .axis {
+    margin: 0 0.6rem;
+  }
+}
+
+/* The list of the large values, and the text of all the metrics */
+.notices {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.notices li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.6rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 6px;
+  background: var(--sunken);
+}
+
+.notices li.empty {
+  display: block;
+  color: var(--muted);
+}
+
+.notices time {
+  font-family: var(--mono);
+  color: var(--muted);
+}
+
+.nmetric {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: none !important;
+}
+
+.nval {
+  font-family: var(--mono);
+  font-weight: 650;
+  color: var(--warn);
+}
+
+pre {
+  margin: 0;
+  overflow-x: auto;
+  max-width: 100%;
+  background: var(--sunken);
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+pre.all {
+  max-height: 22rem;
+  overflow: auto;
+  font-size: 0.72rem;
+  margin-bottom: 0.6rem;
+}
+
+.install {
+  margin-bottom: 0.9rem;
+}
+
+.tabs {
+  margin-bottom: 0.6rem;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  padding: 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+th {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+#development .hint {
+  margin: 0.75rem 0 0;
+}
+
+.foot {
+  max-width: var(--width);
+  margin: 1.5rem auto 0;
+  padding: 1rem 16px 2rem;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
