@@ -170,8 +170,8 @@ importers:
         specifier: ^0.18.5
         version: 0.18.5
       '@mark1russell7/conventions':
-        specifier: ^0.22.0
-        version: 0.22.0
+        specifier: ^0.23.0
+        version: 0.23.0
       '@mark1russell7/cue':
         specifier: github:mark1russell7/cue#0584cc4212b5ef261a4eefc0735bc0309d6aa073
         version: https://codeload.github.com/mark1russell7/cue/tar.gz/0584cc4212b5ef261a4eefc0735bc0309d6aa073
@@ -223,7 +223,7 @@ importers:
         version: https://codeload.github.com/mark1russell7/cue/tar.gz/4923f385b35526bad53e0ac58be9004c48b3098a
       '@mark1russell7/site-pages':
         specifier: ^0.1.8
-        version: 0.1.9
+        version: 0.1.10
       '@types/node':
         specifier: ^26.6.4
         version: 26.6.5
@@ -435,8 +435,8 @@ packages:
   '@loaderkit/resolve@1.0.6':
     resolution: {integrity: sha512-G8FdIoF5CypfwmD9rl8BXod5HDn8JqB0CCNBXDTaRZ+yRYhARrrSToX1zg1zy9jX3zLqigsELwhT4gNtkdQAUg==}
 
-  '@mark1russell7/conventions@0.22.0':
-    resolution: {integrity: sha512-MtNaOnUyG9trSTY0S9In5+JtGwNpYHRGYxvDgncGtn50VBE75fJ7aSFNOxZDcDY4F0+AoG2pOJbnQd+bSSX13Q==}
+  '@mark1russell7/conventions@0.23.0':
+    resolution: {integrity: sha512-VFrPq12jxlLGaX5yLzULf0rRa/7TXp5mmb8H2x2zfQS19tcyY1IYcanDKkQIikf8SjUDNzisDLmspUgPucy16A==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -460,8 +460,8 @@ packages:
       async-browser-context:
         optional: true
 
-  '@mark1russell7/site-pages@0.1.9':
-    resolution: {integrity: sha512-i553Ngctr0MTx+NU5SRjGasotEjYjgnwJTXW3Hn5Cd809QRP2KEgd8GUl4SoVEMK/73O4k4nsHCD24sraje74w==}
+  '@mark1russell7/site-pages@0.1.10':
+    resolution: {integrity: sha512-dcMPqlWsxJ+fRvl5cZH01a+/94ujk5ogRfg5puO2JC7pvE5jq1IV48UrcbtP+zcS5r9zMUbvUVz74E9xQYY8FQ==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -1546,7 +1546,7 @@ snapshots:
     dependencies:
       '@braidai/lang': 1.1.2
 
-  '@mark1russell7/conventions@0.22.0': {}
+  '@mark1russell7/conventions@0.23.0': {}
 
   '@mark1russell7/cue@https://codeload.github.com/mark1russell7/cue/tar.gz/0584cc4212b5ef261a4eefc0735bc0309d6aa073': {}
 
@@ -1556,7 +1556,7 @@ snapshots:
     dependencies:
       page-lifecycle-tracker: 0.1.0
 
-  '@mark1russell7/site-pages@0.1.9': {}
+  '@mark1russell7/site-pages@0.1.10': {}
 
   '@mark1russell7/ste-lint@https://codeload.github.com/mark1russell7/ste-lint/tar.gz/f597d6c1e09bcfcb487bb575825d6d5f29e9e0c7':
     dependencies:
