@@ -822,6 +822,33 @@ th {
   color: var(--muted);
 }
 
+/* On a phone the columns stack and a long name breaks, so the table does not scroll out of view. */
+@media (max-width: 767px) {
+  .table-wrap {
+    overflow-x: visible;
+  }
+
+  thead {
+    display: none;
+  }
+
+  table,
+  tbody,
+  tr,
+  td {
+    display: block;
+  }
+
+  td:first-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  td code {
+    overflow-wrap: anywhere;
+  }
+}
+
 #development .hint {
   margin: 0.75rem 0 0;
 }
