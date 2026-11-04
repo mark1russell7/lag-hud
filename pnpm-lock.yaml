@@ -170,8 +170,8 @@ importers:
         specifier: ^0.18.5
         version: 0.18.5
       '@mark1russell7/conventions':
-        specifier: ^0.25.0
-        version: 0.25.0
+        specifier: ^0.26.0
+        version: 0.26.0
       '@mark1russell7/cue':
         specifier: github:mark1russell7/cue#0584cc4212b5ef261a4eefc0735bc0309d6aa073
         version: https://codeload.github.com/mark1russell7/cue/tar.gz/0584cc4212b5ef261a4eefc0735bc0309d6aa073
@@ -435,8 +435,8 @@ packages:
   '@loaderkit/resolve@1.0.6':
     resolution: {integrity: sha512-G8FdIoF5CypfwmD9rl8BXod5HDn8JqB0CCNBXDTaRZ+yRYhARrrSToX1zg1zy9jX3zLqigsELwhT4gNtkdQAUg==}
 
-  '@mark1russell7/conventions@0.25.0':
-    resolution: {integrity: sha512-p49TqkjzhugGqhKdWjKq5bXOd2ljkwEHdbkEUVzmHSz8b805t2NhGLvbq63oBHMHMv0lKfJDgU0LMIXmpEgqhA==}
+  '@mark1russell7/conventions@0.26.0':
+    resolution: {integrity: sha512-waIPrXWmB7DF5qJI74EGvyLh6sWUMzgYCZGG82rOEXsExQcHmlHvmr/O1mYl7Vz4YVFrUjWPfV/SPgRJRjzD4A==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -1546,7 +1546,7 @@ snapshots:
     dependencies:
       '@braidai/lang': 1.1.2
 
-  '@mark1russell7/conventions@0.25.0': {}
+  '@mark1russell7/conventions@0.26.0': {}
 
   '@mark1russell7/cue@https://codeload.github.com/mark1russell7/cue/tar.gz/0584cc4212b5ef261a4eefc0735bc0309d6aa073': {}
 
