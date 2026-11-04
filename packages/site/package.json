@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@mark1russell7/cue": "github:mark1russell7/cue#4923f385b35526bad53e0ac58be9004c48b3098a",
-    "@mark1russell7/site-pages": "^0.1.8",
+    "@mark1russell7/site-pages": "^0.2.2",
     "@types/node": "^26.6.4",
     "typescript": "^7.0.2",
     "vite": "^8.3.5",

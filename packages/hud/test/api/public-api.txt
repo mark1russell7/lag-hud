@@ -1,0 +1,151 @@
+# The public API of @mark1russell7/lag-hud
+#
+# The names of each entry of the exports field, and the declaration of each name, without comments
+# and private members. The command `api-report check` compares this file with the built .d.ts files.
+# To accept a change of the API, start the build, then `api-report update`, and review the diff.
+
+## . (build/index.d.ts): 21 names
+
+type AttributeValue: build/index.d.ts#AttributeValue
+type Attributes: build/index.d.ts#Attributes
+type Counter: build/index.d.ts#Counter
+type DefaultDisplayElement: build/index.d.ts#DefaultDisplayElement
+type DisplayDocument: build/index.d.ts#DisplayDocument
+type DisplayElement: build/index.d.ts#DisplayElement
+type DisplayParent: build/index.d.ts#DisplayParent
+type Histogram: build/index.d.ts#Histogram
+type HudMeter: build/index.d.ts#HudMeter
+type HudMeterOptions: build/index.d.ts#HudMeterOptions
+type InstrumentOptions: build/index.d.ts#InstrumentOptions
+type LagHudDisplay: build/index.d.ts#LagHudDisplay
+type LagHudDisplayOptions: build/index.d.ts#LagHudDisplayOptions
+type LagStat: build/index.d.ts#LagStat
+type Meter: build/index.d.ts#Meter
+createHudMeter: build/index.d.ts#createHudMeter
+fanOutMeter: build/index.d.ts#fanOutMeter
+formatLagStat: build/index.d.ts#formatLagStat
+lagHudText: build/index.d.ts#lagHudText
+mountLagHud: build/index.d.ts#mountLagHud
+quantile: build/index.d.ts#quantile
+
+## Declarations
+
+### build/index.d.ts#AttributeValue
+type AttributeValue = string | number | boolean | Array<null | undefined | string> | Array<null | undefined | number> | Array<null | undefined | boolean>;
+
+### build/index.d.ts#Attributes
+type Attributes = {
+  [key: string]: AttributeValue | undefined;
+};
+
+### build/index.d.ts#Counter
+type Counter<A extends Attributes = Attributes> = {
+  add(value: number, attributes?: A): void;
+};
+
+### build/index.d.ts#DefaultDisplayElement
+type DefaultDisplayElement = typeof globalThis extends {
+  document: {
+    createElement(tag: "pre"): infer P extends DisplayElement;
+  };
+} ? P : DisplayElement;
+
+### build/index.d.ts#DisplayDocument
+interface DisplayDocument<E extends DisplayElement = DisplayElement> {
+  createElement(tag: "pre"): E;
+  body: DisplayParent<NoInfer<E>> | null;
+}
+
+### build/index.d.ts#DisplayElement
+interface DisplayElement {
+  textContent: string | null;
+  style: {
+    cssText: string;
+  };
+  remove(): void;
+}
+
+### build/index.d.ts#DisplayParent
+interface DisplayParent<E extends DisplayElement = DisplayElement> {
+  append(element: E): void;
+}
+
+### build/index.d.ts#Histogram
+type Histogram<A extends Attributes = Attributes> = {
+  record(value: number, attributes?: A): void;
+};
+
+### build/index.d.ts#HudMeter
+interface HudMeter {
+  meter: Meter;
+  snapshot(): LagStat[];
+  version(): number;
+  onChange(listener: () => void): () => void;
+}
+
+### build/index.d.ts#HudMeterOptions
+interface HudMeterOptions {
+  windowSize?: number;
+  tickMs?: number;
+  setTimer?: (fn: () => void, ms: number) => unknown;
+}
+
+### build/index.d.ts#InstrumentOptions
+type InstrumentOptions = {
+  unit: string;
+  description?: string;
+  advice?: {
+    explicitBucketBoundaries?: number[];
+  };
+};
+
+### build/index.d.ts#LagHudDisplay
+interface LagHudDisplay<E extends DisplayElement = DisplayElement> {
+  readonly element: E;
+  stop(): void;
+}
+
+### build/index.d.ts#LagHudDisplayOptions
+interface LagHudDisplayOptions<E extends DisplayElement = DefaultDisplayElement> {
+  document?: DisplayDocument<E>;
+  parent?: DisplayParent<NoInfer<E>>;
+  title?: string;
+  corner?: "top-left" | "top-right" | "bottom-left" | "bottom-right";
+}
+
+### build/index.d.ts#LagStat
+interface LagStat {
+  name: string;
+  unit: string;
+  kind: "histogram" | "counter";
+  count: number;
+  last: number;
+  p50: number;
+  p95: number;
+  max: number;
+  sum: number;
+}
+
+### build/index.d.ts#Meter
+type Meter = {
+  createHistogram<A extends Attributes = Attributes>(name: string, options: InstrumentOptions): Histogram<A>;
+  createCounter<A extends Attributes = Attributes>(name: string, options: InstrumentOptions): Counter<A>;
+};
+
+### build/index.d.ts#createHudMeter
+export declare function createHudMeter(options?: HudMeterOptions): HudMeter;
+
+### build/index.d.ts#fanOutMeter
+export declare function fanOutMeter(...meters: readonly Meter[]): Meter;
+
+### build/index.d.ts#formatLagStat
+export declare function formatLagStat(s: LagStat): string;
+
+### build/index.d.ts#lagHudText
+export declare function lagHudText(hud: Pick<HudMeter, "snapshot">, title?: string): string;
+
+### build/index.d.ts#mountLagHud
+export declare function mountLagHud<E extends DisplayElement = DefaultDisplayElement>(hud: HudMeter, options?: LagHudDisplayOptions<E>): LagHudDisplay<E>;
+
+### build/index.d.ts#quantile
+export declare function quantile(sorted: readonly number[], q: number): number;
