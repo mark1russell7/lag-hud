@@ -26,7 +26,6 @@ fanOutMeter: build/index.d.ts#fanOutMeter
 formatLagStat: build/index.d.ts#formatLagStat
 lagHudText: build/index.d.ts#lagHudText
 mountLagHud: build/index.d.ts#mountLagHud
-quantile: build/index.d.ts#quantile
 
 ## Declarations
 
@@ -146,6 +145,3 @@ export declare function lagHudText(hud: Pick<HudMeter, "snapshot">, title?: stri
 
 ### build/index.d.ts#mountLagHud
 export declare function mountLagHud<E extends DisplayElement = DefaultDisplayElement>(hud: HudMeter, options?: LagHudDisplayOptions<E>): LagHudDisplay<E>;
-
-### build/index.d.ts#quantile
-export declare function quantile(sorted: readonly number[], q: number): number;

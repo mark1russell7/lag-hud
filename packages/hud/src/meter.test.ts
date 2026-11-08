@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { createHudMeter, fanOutMeter, formatLagStat, quantile } from "./index.ts";
+import { createHudMeter, fanOutMeter, formatLagStat } from "./index.ts";
+
+/** The copy of lag-hud 0.1.1, word for word: the reference of the move to `quantileSorted` of rigor-statistics. */
+function copyQuantile(sorted: readonly number[], q: number): number {
+  if (sorted.length === 0) return 0;
+  return sorted[Math.min(sorted.length - 1, Math.max(0, Math.ceil(q * sorted.length) - 1))]!;
+}
 
 describe("the in-memory meter", () => {
   it("summarizes a histogram over its window: count, last, p50, p95, max", () => {
@@ -44,10 +50,32 @@ describe("the in-memory meter", () => {
     expect(heard).toEqual([1]);
   });
 
-  it("gives the nearest-rank quantile, and 0 for no values", () => {
-    expect(quantile([], 0.5)).toBe(0);
-    expect(quantile([1, 2, 3, 4], 0.5)).toBe(2);
-    expect(quantile([1, 2, 3, 4], 1)).toBe(4);
+  it("gives the p50 and the p95 of the copy of lag-hud 0.1.1 for each window", () => {
+    let seed = 7;
+    const next = (): number => (seed = (seed * 1103515245 + 12345) % 2147483648) / 2147483648;
+    for (let n = 1; n <= 250; n++) {
+      const hud = createHudMeter({ windowSize: 200, setTimer: () => undefined });
+      const h = hud.meter.createHistogram("x", { unit: "ms" });
+      const values = Array.from({ length: n }, () => Math.round(next() * 1000) / 10);
+      for (const v of values) h.record(v);
+      const sorted = values.slice(-200).sort((a, b) => a - b);
+      expect(hud.snapshot()[0], `n = ${n}`).toMatchObject({ p50: copyQuantile(sorted, 0.5), p95: copyQuantile(sorted, 0.95) });
+    }
+  });
+
+  it("gives 0 for a histogram with no values, as the copy did", () => {
+    const hud = createHudMeter({ setTimer: () => undefined });
+    hud.meter.createHistogram("x", { unit: "ms" });
+    expect(hud.snapshot()[0]).toMatchObject({ count: 0, p50: 0, p95: 0, max: 0 });
+  });
+
+  it("keeps a NaN out of the window, so the quantiles stay numbers", () => {
+    const hud = createHudMeter({ setTimer: () => undefined });
+    const h = hud.meter.createHistogram("x", { unit: "ms" });
+    h.record(Number.NaN);
+    expect(hud.snapshot()[0]).toMatchObject({ count: 1, p50: 0, p95: 0, max: 0 });
+    for (const v of [3, Number.NaN, 1, 2]) h.record(v);
+    expect(hud.snapshot()[0]).toMatchObject({ count: 5, p50: 2, p95: 3, max: 3, sum: 6 });
   });
 });
 
