@@ -1,8 +1,10 @@
 /**
  * The meter types: a structural subset of the `Meter` of `@opentelemetry/api`, the same shape as the
  * `Meter` of `@mark1russell7/lag`. Thus `lag` can report into the meter of this package, and this
- * package needs no dependency.
+ * package needs no dependency on OpenTelemetry or on `lag`.
  */
+
+import { quantileSorted } from "@mark1russell7/rigor-statistics";
 
 /** A value of an attribute: a primitive, or an array of primitives of one type. */
 export type AttributeValue = string | number | boolean | Array<null | undefined | string> | Array<null | undefined | number> | Array<null | undefined | boolean>;
@@ -80,12 +82,6 @@ interface Series {
   last: number;
 }
 
-/** This function gives the value at the quantile `q` of an ascending array (the nearest rank). */
-export function quantile(sorted: readonly number[], q: number): number {
-  if (sorted.length === 0) return 0;
-  return sorted[Math.min(sorted.length - 1, Math.max(0, Math.ceil(q * sorted.length) - 1))]!;
-}
-
 /**
  * This function makes an in-memory meter. A histogram keeps its last `windowSize` values and counts each one. A
  * counter keeps its total. The change notices come at most one time for each `tickMs`, so a display updates at a
@@ -127,7 +123,8 @@ export function createHudMeter(options: HudMeterOptions = {}): HudMeter {
       const s = seriesOf(name, opts.unit, "histogram");
       return {
         record(value: number) {
-          s.window.push(value);
+          // a NaN has no rank, so it does not go into the window of the quantiles
+          if (!Number.isNaN(value)) s.window.push(value);
           if (s.window.length > windowSize) s.window.shift();
           s.count++;
           s.last = value;
@@ -150,14 +147,16 @@ export function createHudMeter(options: HudMeterOptions = {}): HudMeter {
   const snapshot = (): LagStat[] =>
     [...series].map(([name, s]) => {
       const sorted = s.window.toSorted((a, b) => a - b);
+      // an empty window has no data, and the display shows 0 for it
+      const at = (p: number): number => (sorted.length === 0 ? 0 : quantileSorted(sorted, p, "nearest-rank"));
       return {
         name,
         unit: s.unit,
         kind: s.kind,
         count: s.count,
         last: s.last,
-        p50: quantile(sorted, 0.5),
-        p95: quantile(sorted, 0.95),
+        p50: at(0.5),
+        p95: at(0.95),
         max: sorted.at(-1) ?? 0,
         sum: s.kind === "counter" ? s.sum : sorted.reduce((a, b) => a + b, 0),
       };

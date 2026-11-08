@@ -6,7 +6,6 @@ export {
   createHudMeter,
   fanOutMeter,
   formatLagStat,
-  quantile,
   type Attributes,
   type AttributeValue,
   type Counter,

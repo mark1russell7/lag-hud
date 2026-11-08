@@ -195,6 +195,10 @@ importers:
         version: 7.0.2
 
   packages/hud:
+    dependencies:
+      '@mark1russell7/rigor-statistics':
+        specifier: ^0.1.23
+        version: 0.1.23
     devDependencies:
       '@mark1russell7/cue':
         specifier: github:mark1russell7/cue#0584cc4212b5ef261a4eefc0735bc0309d6aa073
@@ -470,6 +474,14 @@ packages:
 
   '@mark1russell7/rigor-generators@0.1.5':
     resolution: {integrity: sha512-YkABrG6+AV4oZKWoSIayDGxKTqcTMbp/eGa+3u00X09Jv9TfpHFDeqHlEQARMBzJ/kvy/EMNIXQZMGa3Nobuzw==}
+    engines: {node: '>=22'}
+
+  '@mark1russell7/rigor-generators@0.1.8':
+    resolution: {integrity: sha512-6AC/YQdSrMKs/1NcHesjmmxVjKrqTDXjzKaElE8N8TgsqgiApCbsnk5xRoGJfvIJZUX7vJHFB9F+w48OSdRtHQ==}
+    engines: {node: '>=22'}
+
+  '@mark1russell7/rigor-statistics@0.1.23':
+    resolution: {integrity: sha512-UVO6cWyu6PXt33qvj5vEOVzeSfU4jQy6yaowvMi3ETlQid/srKmam3kYokxyDHVc+yNzYr3zXVhgtOUKYcNkdA==}
     engines: {node: '>=22'}
 
   '@mark1russell7/rigor-statistics@0.1.9':
@@ -1582,6 +1594,12 @@ snapshots:
       page-lifecycle-tracker: 0.1.0
 
   '@mark1russell7/rigor-generators@0.1.5': {}
+
+  '@mark1russell7/rigor-generators@0.1.8': {}
+
+  '@mark1russell7/rigor-statistics@0.1.23':
+    dependencies:
+      '@mark1russell7/rigor-generators': 0.1.8
 
   '@mark1russell7/rigor-statistics@0.1.9':
     dependencies:
