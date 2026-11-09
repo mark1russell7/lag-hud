@@ -35,6 +35,8 @@ const display = mountLagHud(hud, { corner: "bottom-right" });
 const meter = fanOutMeter(hud.meter, otelMeterProvider.getMeter("lag"));
 ```
 
+`fanOutMeter` and the meter types have their home in `@mark1russell7/lag/meters`. This package exports them again. The types come from `@opentelemetry/api`, so this package has `@opentelemetry/api` as a peer dependency.
+
 ## The display
 
 `mountLagHud(hud, options)` adds a small fixed panel to the page: a title line, then one line for each metric. `formatLagStat` gives the line of one metric. `lagHudText` gives the text of the panel, for a display of your own.
