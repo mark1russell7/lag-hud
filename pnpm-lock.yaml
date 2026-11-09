@@ -183,7 +183,7 @@ importers:
         version: https://codeload.github.com/mark1russell7/ste-lint/tar.gz/f597d6c1e09bcfcb487bb575825d6d5f29e9e0c7
       '@mark1russell7/template-cli':
         specifier: ^0.1.2
-        version: 0.1.5
+        version: 0.1.7
       publint:
         specifier: ^0.3.25
         version: 0.3.25
@@ -201,7 +201,7 @@ importers:
         version: 0.5.0(@opentelemetry/api@1.10.0)
       '@mark1russell7/rigor-statistics':
         specifier: ^0.1.23
-        version: 0.1.23
+        version: 0.1.27
     devDependencies:
       '@mark1russell7/cue':
         specifier: github:mark1russell7/cue#0584cc4212b5ef261a4eefc0735bc0309d6aa073
@@ -225,8 +225,8 @@ importers:
   packages/site:
     dependencies:
       '@mark1russell7/lag':
-        specifier: ^0.4.2
-        version: 0.4.2
+        specifier: ^0.5.0
+        version: 0.5.0(@opentelemetry/api@1.10.0)
       '@mark1russell7/lag-hud':
         specifier: workspace:*
         version: link:../hud
@@ -470,14 +470,6 @@ packages:
     engines: {node: '>=22'}
     hasBin: true
 
-  '@mark1russell7/lag@0.4.2':
-    resolution: {integrity: sha512-PIRzFnD8VaYlBnN7e5iNCfqeztH85mLWp+gzTUr2g/lYNujmXV28Dd8i55N2J4jhp/SKd2artH7t8LsCv+COiA==}
-    peerDependencies:
-      async-browser-context: ^0.3.0
-    peerDependenciesMeta:
-      async-browser-context:
-        optional: true
-
   '@mark1russell7/lag@0.5.0':
     resolution: {integrity: sha512-DbBryO3yYvwUu7ReOb510N0SXr3eqzOyctveQIxb5v1t135TV7QcxzyRD204mvuxVr8EiPoQlIWD98flho0frQ==}
     peerDependencies:
@@ -489,16 +481,16 @@ packages:
       async-browser-context:
         optional: true
 
+  '@mark1russell7/rigor-generators@0.1.13':
+    resolution: {integrity: sha512-Q8p3gOWssTt/ud95PuS3eha8KcY7htPuHE4oRKyQt0wxDy+Qtp/tQ07DZ/pt7vQZpVTPyQEIEGF+s91cfZXW9A==}
+    engines: {node: '>=22'}
+
   '@mark1russell7/rigor-generators@0.1.5':
     resolution: {integrity: sha512-YkABrG6+AV4oZKWoSIayDGxKTqcTMbp/eGa+3u00X09Jv9TfpHFDeqHlEQARMBzJ/kvy/EMNIXQZMGa3Nobuzw==}
     engines: {node: '>=22'}
 
-  '@mark1russell7/rigor-generators@0.1.8':
-    resolution: {integrity: sha512-6AC/YQdSrMKs/1NcHesjmmxVjKrqTDXjzKaElE8N8TgsqgiApCbsnk5xRoGJfvIJZUX7vJHFB9F+w48OSdRtHQ==}
-    engines: {node: '>=22'}
-
-  '@mark1russell7/rigor-statistics@0.1.23':
-    resolution: {integrity: sha512-UVO6cWyu6PXt33qvj5vEOVzeSfU4jQy6yaowvMi3ETlQid/srKmam3kYokxyDHVc+yNzYr3zXVhgtOUKYcNkdA==}
+  '@mark1russell7/rigor-statistics@0.1.27':
+    resolution: {integrity: sha512-UnBEZVSVSytwFH5pJ5ezlOCEs/19Ur0/REQ+Tq5BYs8uYWSNoP/hZNGx2tdqLN2Rn0u+A41GwieBnuM6DuWS4g==}
     engines: {node: '>=22'}
 
   '@mark1russell7/rigor-statistics@0.1.9':
@@ -516,8 +508,8 @@ packages:
     engines: {node: '>=22'}
     hasBin: true
 
-  '@mark1russell7/template-cli@0.1.5':
-    resolution: {integrity: sha512-OenwEgVEkrt6HjUtIsTgplkJJTBIZLwb0mxiPow533++mbrrJ8BvHK+MsMLFm6X5A8EJZlLgd6IXJspZy3L2og==}
+  '@mark1russell7/template-cli@0.1.7':
+    resolution: {integrity: sha512-Wy4xa6OgNXyMunSyXOArxmrspLSCuyw1pf1P5X45Uiwe1aWHzn0LJptUYVGUSwT3GTp9FGVDhFMeOnKlapD3Xw==}
     engines: {node: '>=22.12'}
     hasBin: true
 
@@ -1563,23 +1555,19 @@ snapshots:
 
   '@mark1russell7/cue@https://codeload.github.com/mark1russell7/cue/tar.gz/4923f385b35526bad53e0ac58be9004c48b3098a': {}
 
-  '@mark1russell7/lag@0.4.2':
-    dependencies:
-      page-lifecycle-tracker: 0.1.0
-
   '@mark1russell7/lag@0.5.0(@opentelemetry/api@1.10.0)':
     dependencies:
       page-lifecycle-tracker: 0.1.0
     optionalDependencies:
       '@opentelemetry/api': 1.10.0
 
+  '@mark1russell7/rigor-generators@0.1.13': {}
+
   '@mark1russell7/rigor-generators@0.1.5': {}
 
-  '@mark1russell7/rigor-generators@0.1.8': {}
-
-  '@mark1russell7/rigor-statistics@0.1.23':
+  '@mark1russell7/rigor-statistics@0.1.27':
     dependencies:
-      '@mark1russell7/rigor-generators': 0.1.8
+      '@mark1russell7/rigor-generators': 0.1.13
 
   '@mark1russell7/rigor-statistics@0.1.9':
     dependencies:
@@ -1593,7 +1581,7 @@ snapshots:
     dependencies:
       typescript: 6.0.3
 
-  '@mark1russell7/template-cli@0.1.5':
+  '@mark1russell7/template-cli@0.1.7':
     dependencies:
       '@clack/prompts': 1.8.1
 
