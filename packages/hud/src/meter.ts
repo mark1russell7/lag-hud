@@ -1,33 +1,13 @@
 /**
- * The meter types: a structural subset of the `Meter` of `@opentelemetry/api`, the same shape as the
- * `Meter` of `@mark1russell7/lag`. Thus `lag` can report into the meter of this package, and this
- * package needs no dependency on OpenTelemetry or on `lag`.
+ * The in-memory meter of the display. The meter types and `fanOutMeter` have their home in
+ * `@mark1russell7/lag/meters`, on the types of `@opentelemetry/api`. This package exports them again.
  */
 
 import { quantileSorted } from "@mark1russell7/rigor-statistics";
+import type { Meter } from "@mark1russell7/lag/meters";
 
-/** A value of an attribute: a primitive, or an array of primitives of one type. */
-export type AttributeValue = string | number | boolean | Array<null | undefined | string> | Array<null | undefined | number> | Array<null | undefined | boolean>;
-/** The attributes of a value. */
-export type Attributes = { [key: string]: AttributeValue | undefined };
-
-/** A histogram: it records each value. */
-export type Histogram<A extends Attributes = Attributes> = { record(value: number, attributes?: A): void };
-/** A counter: it adds each value. */
-export type Counter<A extends Attributes = Attributes> = { add(value: number, attributes?: A): void };
-
-/** The options of an instrument. */
-export type InstrumentOptions = {
-  unit: string;
-  description?: string;
-  advice?: { explicitBucketBoundaries?: number[] };
-};
-
-/** A meter that makes histograms and counters. */
-export type Meter = {
-  createHistogram<A extends Attributes = Attributes>(name: string, options: InstrumentOptions): Histogram<A>;
-  createCounter<A extends Attributes = Attributes>(name: string, options: InstrumentOptions): Counter<A>;
-};
+export { fanOutMeter } from "@mark1russell7/lag/meters";
+export type { Attributes, AttributeValue, Counter, Histogram, InstrumentOptions, Meter } from "@mark1russell7/lag/meters";
 
 /** The summary of one metric. */
 export interface LagStat {
@@ -168,23 +148,6 @@ export function createHudMeter(options: HudMeterOptions = {}): HudMeter {
     onChange(listener) {
       listeners.add(listener);
       return () => listeners.delete(listener);
-    },
-  };
-}
-
-/**
- * This function gives one meter that records into each meter of a list, for example the meter of this package and
- * the meter of OpenTelemetry.
- */
-export function fanOutMeter(...meters: readonly Meter[]): Meter {
-  return {
-    createHistogram: (name, opts) => {
-      const all = meters.map((m) => m.createHistogram(name, opts));
-      return { record: (value, attributes) => { for (const h of all) h.record(value, attributes); } };
-    },
-    createCounter: (name, opts) => {
-      const all = meters.map((m) => m.createCounter(name, opts));
-      return { add: (value, attributes) => { for (const c of all) c.add(value, attributes); } };
     },
   };
 }

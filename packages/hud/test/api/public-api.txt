@@ -6,41 +6,28 @@
 
 ## . (build/index.d.ts): names
 
-type AttributeValue: build/index.d.ts#AttributeValue
-type Attributes: build/index.d.ts#Attributes
-type Counter: build/index.d.ts#Counter
+type AttributeValue: @mark1russell7/lag/meters#AttributeValue (external)
+type Attributes: @mark1russell7/lag/meters#Attributes (external)
+type Counter: @mark1russell7/lag/meters#Counter (external)
 type DefaultDisplayElement: build/index.d.ts#DefaultDisplayElement
 type DisplayDocument: build/index.d.ts#DisplayDocument
 type DisplayElement: build/index.d.ts#DisplayElement
 type DisplayParent: build/index.d.ts#DisplayParent
-type Histogram: build/index.d.ts#Histogram
+type Histogram: @mark1russell7/lag/meters#Histogram (external)
 type HudMeter: build/index.d.ts#HudMeter
 type HudMeterOptions: build/index.d.ts#HudMeterOptions
-type InstrumentOptions: build/index.d.ts#InstrumentOptions
+type InstrumentOptions: @mark1russell7/lag/meters#InstrumentOptions (external)
 type LagHudDisplay: build/index.d.ts#LagHudDisplay
 type LagHudDisplayOptions: build/index.d.ts#LagHudDisplayOptions
 type LagStat: build/index.d.ts#LagStat
-type Meter: build/index.d.ts#Meter
+type Meter: @mark1russell7/lag/meters#Meter (external)
 createHudMeter: build/index.d.ts#createHudMeter
-fanOutMeter: build/index.d.ts#fanOutMeter
+fanOutMeter: @mark1russell7/lag/meters#fanOutMeter (external)
 formatLagStat: build/index.d.ts#formatLagStat
 lagHudText: build/index.d.ts#lagHudText
 mountLagHud: build/index.d.ts#mountLagHud
 
 ## Declarations
-
-### build/index.d.ts#AttributeValue
-type AttributeValue = string | number | boolean | Array<null | undefined | string> | Array<null | undefined | number> | Array<null | undefined | boolean>;
-
-### build/index.d.ts#Attributes
-type Attributes = {
-  [key: string]: AttributeValue | undefined;
-};
-
-### build/index.d.ts#Counter
-type Counter<A extends Attributes = Attributes> = {
-  add(value: number, attributes?: A): void;
-};
 
 ### build/index.d.ts#DefaultDisplayElement
 type DefaultDisplayElement = typeof globalThis extends {
@@ -69,14 +56,9 @@ interface DisplayParent<E extends DisplayElement = DisplayElement> {
   append(element: E): void;
 }
 
-### build/index.d.ts#Histogram
-type Histogram<A extends Attributes = Attributes> = {
-  record(value: number, attributes?: A): void;
-};
-
 ### build/index.d.ts#HudMeter
 interface HudMeter {
-  meter: Meter;
+  meter: Meter$1;
   snapshot(): LagStat[];
   version(): number;
   onChange(listener: () => void): () => void;
@@ -88,15 +70,6 @@ interface HudMeterOptions {
   tickMs?: number;
   setTimer?: (fn: () => void, ms: number) => unknown;
 }
-
-### build/index.d.ts#InstrumentOptions
-type InstrumentOptions = {
-  unit: string;
-  description?: string;
-  advice?: {
-    explicitBucketBoundaries?: number[];
-  };
-};
 
 ### build/index.d.ts#LagHudDisplay
 interface LagHudDisplay<E extends DisplayElement = DisplayElement> {
@@ -125,17 +98,8 @@ interface LagStat {
   sum: number;
 }
 
-### build/index.d.ts#Meter
-type Meter = {
-  createHistogram<A extends Attributes = Attributes>(name: string, options: InstrumentOptions): Histogram<A>;
-  createCounter<A extends Attributes = Attributes>(name: string, options: InstrumentOptions): Counter<A>;
-};
-
 ### build/index.d.ts#createHudMeter
 export declare function createHudMeter(options?: HudMeterOptions): HudMeter;
-
-### build/index.d.ts#fanOutMeter
-export declare function fanOutMeter(...meters: readonly Meter[]): Meter;
 
 ### build/index.d.ts#formatLagStat
 export declare function formatLagStat(s: LagStat): string;
