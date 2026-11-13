@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package",
   "name": "@mark1russell7/lag-hud",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "An in-memory meter, a fan-out and a display without a framework for the lag monitors of @mark1russell7/lag.",
   "keywords": [
     "lag",
