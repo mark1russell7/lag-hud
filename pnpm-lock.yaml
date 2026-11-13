@@ -174,7 +174,7 @@ importers:
         version: 0.5.5
       '@mark1russell7/conventions':
         specifier: ^0.41.0
-        version: 0.41.2
+        version: 0.41.4
       '@mark1russell7/cue':
         specifier: github:mark1russell7/cue#0584cc4212b5ef261a4eefc0735bc0309d6aa073
         version: https://codeload.github.com/mark1russell7/cue/tar.gz/0584cc4212b5ef261a4eefc0735bc0309d6aa073
@@ -204,7 +204,7 @@ importers:
         version: 0.5.0(@opentelemetry/api@1.10.0)
       '@mark1russell7/rigor-statistics':
         specifier: ^0.1.23
-        version: 0.1.28
+        version: 0.1.29
     devDependencies:
       '@mark1russell7/cue':
         specifier: github:mark1russell7/cue#0584cc4212b5ef261a4eefc0735bc0309d6aa073
@@ -486,8 +486,8 @@ packages:
     engines: {node: '>=22'}
     hasBin: true
 
-  '@mark1russell7/conventions@0.41.2':
-    resolution: {integrity: sha512-qmtns3BXajCeLF2dXNNJ4Bc/PZ5F6ZRyo2U+4CbsMubnbG/N6dPok1WgoMMD6sSvCsK3QFudkypOTvugGWZcpA==}
+  '@mark1russell7/conventions@0.41.4':
+    resolution: {integrity: sha512-FcyqVT2gDgKxKDvr7A9sbYSPUxf0fYVDcjAoUnIGdYoJFHP5W08Jph2T3KgYJoDINPJOten+oQ/AOP97hE0iiQ==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -514,20 +514,12 @@ packages:
       async-browser-context:
         optional: true
 
-  '@mark1russell7/rigor-generators@0.1.13':
-    resolution: {integrity: sha512-Q8p3gOWssTt/ud95PuS3eha8KcY7htPuHE4oRKyQt0wxDy+Qtp/tQ07DZ/pt7vQZpVTPyQEIEGF+s91cfZXW9A==}
-    engines: {node: '>=22'}
-
   '@mark1russell7/rigor-generators@0.1.15':
     resolution: {integrity: sha512-0r+5JbxvSk6H0rTGqhzmlnE5UAHAImOH7R1CbOjQARLil2zOYkvvJzWvnwC5txLCw71eyVCvpT7rb09oKRcGxQ==}
     engines: {node: '>=22'}
 
-  '@mark1russell7/rigor-statistics@0.1.27':
-    resolution: {integrity: sha512-UnBEZVSVSytwFH5pJ5ezlOCEs/19Ur0/REQ+Tq5BYs8uYWSNoP/hZNGx2tdqLN2Rn0u+A41GwieBnuM6DuWS4g==}
-    engines: {node: '>=22'}
-
-  '@mark1russell7/rigor-statistics@0.1.28':
-    resolution: {integrity: sha512-jynyIvNwFOCN3pHMxeB1iuxmG2PvikSW07MzCF0a5icg1SWsule3NIVf46I7lNVLKQrbR5Kkbxq82jReP1FKIA==}
+  '@mark1russell7/rigor-statistics@0.1.29':
+    resolution: {integrity: sha512-Wh91NJIwxIRN3+a5V2bqUkMhdPcjHI+gVZBCnohf12ZegdSTNqGlpqS2WXYmrRVjasF9EBgm1lC8GQNYpBSg7Q==}
     engines: {node: '>=22'}
 
   '@mark1russell7/site-pages@0.4.7':
@@ -1768,9 +1760,9 @@ snapshots:
 
   '@mark1russell7/api-report@0.5.5':
     dependencies:
-      '@mark1russell7/conventions': 0.41.2
+      '@mark1russell7/conventions': 0.41.4
 
-  '@mark1russell7/conventions@0.41.2':
+  '@mark1russell7/conventions@0.41.4':
     dependencies:
       yaml: 2.9.1
 
@@ -1784,21 +1776,15 @@ snapshots:
     optionalDependencies:
       '@opentelemetry/api': 1.10.0
 
-  '@mark1russell7/rigor-generators@0.1.13': {}
-
   '@mark1russell7/rigor-generators@0.1.15': {}
 
-  '@mark1russell7/rigor-statistics@0.1.27':
-    dependencies:
-      '@mark1russell7/rigor-generators': 0.1.13
-
-  '@mark1russell7/rigor-statistics@0.1.28':
+  '@mark1russell7/rigor-statistics@0.1.29':
     dependencies:
       '@mark1russell7/rigor-generators': 0.1.15
 
   '@mark1russell7/site-pages@0.4.7':
     dependencies:
-      '@mark1russell7/rigor-statistics': 0.1.27
+      '@mark1russell7/rigor-statistics': 0.1.29
 
   '@mark1russell7/ste-lint@https://codeload.github.com/mark1russell7/ste-lint/tar.gz/f597d6c1e09bcfcb487bb575825d6d5f29e9e0c7':
     dependencies:
