@@ -201,10 +201,10 @@ importers:
     dependencies:
       '@mark1russell7/lag':
         specifier: ^0.5.0
-        version: 0.5.0(@opentelemetry/api@1.10.0)
+        version: 0.5.1(@opentelemetry/api@1.10.0)
       '@mark1russell7/rigor-statistics':
         specifier: ^0.2.1
-        version: 0.2.1
+        version: 0.2.5
     devDependencies:
       '@mark1russell7/cue':
         specifier: github:mark1russell7/cue#0584cc4212b5ef261a4eefc0735bc0309d6aa073
@@ -229,7 +229,7 @@ importers:
     dependencies:
       '@mark1russell7/lag':
         specifier: ^0.5.0
-        version: 0.5.0(@opentelemetry/api@1.10.0)
+        version: 0.5.1(@opentelemetry/api@1.10.0)
       '@mark1russell7/lag-hud':
         specifier: workspace:*
         version: link:../hud
@@ -238,8 +238,8 @@ importers:
         specifier: github:mark1russell7/cue#4923f385b35526bad53e0ac58be9004c48b3098a
         version: https://codeload.github.com/mark1russell7/cue/tar.gz/4923f385b35526bad53e0ac58be9004c48b3098a
       '@mark1russell7/site-pages':
-        specifier: ^0.4.1
-        version: 0.4.8
+        specifier: ^0.5.0
+        version: 0.5.0
       '@types/node':
         specifier: ^26.6.4
         version: 26.6.6
@@ -503,8 +503,8 @@ packages:
     engines: {node: '>=22'}
     hasBin: true
 
-  '@mark1russell7/lag@0.5.0':
-    resolution: {integrity: sha512-DbBryO3yYvwUu7ReOb510N0SXr3eqzOyctveQIxb5v1t135TV7QcxzyRD204mvuxVr8EiPoQlIWD98flho0frQ==}
+  '@mark1russell7/lag@0.5.1':
+    resolution: {integrity: sha512-hsBTTv8awSYB5XoKGxvMNjR5mj2lzceZwKdlhbAzuaNZ9ZOmcQPGrpBqGAjIBoFvKC605jwp9L+gv+BXIuC0rA==}
     peerDependencies:
       '@opentelemetry/api': ^1.9.0
       async-browser-context: ^0.3.0
@@ -514,24 +514,16 @@ packages:
       async-browser-context:
         optional: true
 
-  '@mark1russell7/rigor-generators@0.1.15':
-    resolution: {integrity: sha512-0r+5JbxvSk6H0rTGqhzmlnE5UAHAImOH7R1CbOjQARLil2zOYkvvJzWvnwC5txLCw71eyVCvpT7rb09oKRcGxQ==}
-    engines: {node: '>=22'}
-
   '@mark1russell7/rigor-generators@0.1.16':
     resolution: {integrity: sha512-C94Q4C31aZ8UXx1R0JSBV7DiQFl5tVpbFxHxHzHaSqr3dTgmCkEvLrvlUV8/0/GZqPhQYG9cbX6GOlqfRj/h4g==}
     engines: {node: '>=22'}
 
-  '@mark1russell7/rigor-statistics@0.1.29':
-    resolution: {integrity: sha512-Wh91NJIwxIRN3+a5V2bqUkMhdPcjHI+gVZBCnohf12ZegdSTNqGlpqS2WXYmrRVjasF9EBgm1lC8GQNYpBSg7Q==}
+  '@mark1russell7/rigor-statistics@0.2.5':
+    resolution: {integrity: sha512-jaUqrz8FmsUoR9n0MeRUIk9UTpG5QL+dF/moh+C23fyihb00LgOD42Up//1piIPVZZDiq6lua0sBcSKMwh5IFg==}
     engines: {node: '>=22'}
 
-  '@mark1russell7/rigor-statistics@0.2.1':
-    resolution: {integrity: sha512-4m8yw4giLH/y1HcsroBQSHAWByC5fK/iJb4dNGCPT6Eelr26bxvBz7kMC7UMFSzGcR+W8GTrAwlAQmmFnQDMuA==}
-    engines: {node: '>=22'}
-
-  '@mark1russell7/site-pages@0.4.8':
-    resolution: {integrity: sha512-uN7SV7VxrsMyH7/cPOUClFOnJhw24S2+qVaMIoNK+7AtJe3FB4l5qN2NowKAYvYgLcDpY4gUBlw9meJ6/Gq2pQ==}
+  '@mark1russell7/site-pages@0.5.0':
+    resolution: {integrity: sha512-sGDFRCr2fIRarRV4FCoDvfYBSOln134N9ApuwNMKXYtiiXpPv8LMeUUB/19QQU7fJDKWGZgqPSAJZ/+RA7p63A==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -1778,27 +1770,21 @@ snapshots:
 
   '@mark1russell7/cue@https://codeload.github.com/mark1russell7/cue/tar.gz/4923f385b35526bad53e0ac58be9004c48b3098a': {}
 
-  '@mark1russell7/lag@0.5.0(@opentelemetry/api@1.10.0)':
+  '@mark1russell7/lag@0.5.1(@opentelemetry/api@1.10.0)':
     dependencies:
       page-lifecycle-tracker: 0.1.0
     optionalDependencies:
       '@opentelemetry/api': 1.10.0
 
-  '@mark1russell7/rigor-generators@0.1.15': {}
-
   '@mark1russell7/rigor-generators@0.1.16': {}
 
-  '@mark1russell7/rigor-statistics@0.1.29':
-    dependencies:
-      '@mark1russell7/rigor-generators': 0.1.15
-
-  '@mark1russell7/rigor-statistics@0.2.1':
+  '@mark1russell7/rigor-statistics@0.2.5':
     dependencies:
       '@mark1russell7/rigor-generators': 0.1.16
 
-  '@mark1russell7/site-pages@0.4.8':
+  '@mark1russell7/site-pages@0.5.0':
     dependencies:
-      '@mark1russell7/rigor-statistics': 0.1.29
+      '@mark1russell7/rigor-statistics': 0.2.5
 
   '@mark1russell7/ste-lint@https://codeload.github.com/mark1russell7/ste-lint/tar.gz/f597d6c1e09bcfcb487bb575825d6d5f29e9e0c7':
     dependencies:
