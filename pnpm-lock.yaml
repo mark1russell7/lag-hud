@@ -210,7 +210,7 @@ importers:
     dependencies:
       '@mark1russell7/lag':
         specifier: ^0.5.0
-        version: 0.5.2(@opentelemetry/api@1.10.0)
+        version: 0.5.3(@opentelemetry/api@1.10.0)
       '@mark1russell7/rigor-statistics':
         specifier: ^0.2.1
         version: 0.2.19
@@ -238,7 +238,7 @@ importers:
     dependencies:
       '@mark1russell7/lag':
         specifier: ^0.5.0
-        version: 0.5.2(@opentelemetry/api@1.10.0)
+        version: 0.5.3(@opentelemetry/api@1.10.0)
       '@mark1russell7/lag-hud':
         specifier: workspace:*
         version: link:../hud
@@ -512,8 +512,8 @@ packages:
     engines: {node: '>=22'}
     hasBin: true
 
-  '@mark1russell7/lag@0.5.2':
-    resolution: {integrity: sha512-ASTxWsgPzgLr7fb5f4JK7wKazrWgPCVqnD1Cu96NtP31onRD8hy3U7dT6LqCO9QuqCCB2OlmlRVPzO/xRsMsqQ==}
+  '@mark1russell7/lag@0.5.3':
+    resolution: {integrity: sha512-oHZ+M994jzVw3M0F/AZrUp/6jB6yaWEeGq61e1RhfrKuKimUawuJ7mKp2Y9TduvSobsvHbGUTud+BA/QJegQLw==}
     peerDependencies:
       '@opentelemetry/api': ^1.9.0
       async-browser-context: ^0.3.0
@@ -1788,7 +1788,7 @@ snapshots:
 
   '@mark1russell7/cue@https://codeload.github.com/mark1russell7/cue/tar.gz/4923f385b35526bad53e0ac58be9004c48b3098a': {}
 
-  '@mark1russell7/lag@0.5.2(@opentelemetry/api@1.10.0)':
+  '@mark1russell7/lag@0.5.3(@opentelemetry/api@1.10.0)':
     dependencies:
       page-lifecycle-tracker: 0.1.0
     optionalDependencies:
