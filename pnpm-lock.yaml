@@ -180,10 +180,10 @@ importers:
         version: 0.18.5
       '@mark1russell7/api-report':
         specifier: ^0.5.3
-        version: 0.5.20
+        version: 0.5.21
       '@mark1russell7/conventions':
-        specifier: ^0.52.0
-        version: 0.52.0
+        specifier: ^0.53.0
+        version: 0.53.0
       '@mark1russell7/cue':
         specifier: github:mark1russell7/cue#0584cc4212b5ef261a4eefc0735bc0309d6aa073
         version: https://codeload.github.com/mark1russell7/cue/tar.gz/0584cc4212b5ef261a4eefc0735bc0309d6aa073
@@ -213,7 +213,7 @@ importers:
         version: 0.5.4(@opentelemetry/api@1.10.0)
       '@mark1russell7/rigor-statistics':
         specifier: ^0.2.1
-        version: 0.2.25
+        version: 0.2.28
     devDependencies:
       '@mark1russell7/cue':
         specifier: github:mark1russell7/cue#0584cc4212b5ef261a4eefc0735bc0309d6aa073
@@ -248,7 +248,7 @@ importers:
         version: https://codeload.github.com/mark1russell7/cue/tar.gz/4923f385b35526bad53e0ac58be9004c48b3098a
       '@mark1russell7/site-pages':
         specifier: ^0.8.0
-        version: 0.8.4
+        version: 0.8.6
       '@types/node':
         specifier: ^26.6.4
         version: 26.6.6
@@ -490,13 +490,13 @@ packages:
   '@loaderkit/resolve@1.0.6':
     resolution: {integrity: sha512-G8FdIoF5CypfwmD9rl8BXod5HDn8JqB0CCNBXDTaRZ+yRYhARrrSToX1zg1zy9jX3zLqigsELwhT4gNtkdQAUg==}
 
-  '@mark1russell7/api-report@0.5.20':
-    resolution: {integrity: sha512-4F8BCWeZ8NQMAdh36MAIvn58wzSlsUdhAY4j2KuyejMtl2x1xkH9FWPKIa5d6krkMnvZyZIktgHuSuV27uUixQ==}
+  '@mark1russell7/api-report@0.5.21':
+    resolution: {integrity: sha512-OqjA6ti0bb1P4wuAU6ukfH6OaAampo+wrKnPKXwU3wy9bSW/sBmAvc225jkV3E4zRYghuUB4veCQNiLtOJGHRQ==}
     engines: {node: '>=22'}
     hasBin: true
 
-  '@mark1russell7/conventions@0.52.0':
-    resolution: {integrity: sha512-jxqFxbMf8dtahUyqYLSjxcHJ4wxMjmAPlODfnzxA3884PqG+WjpuLXjh1nZaRKdmVMIqRBhvNX+m7tL1hwSEvw==}
+  '@mark1russell7/conventions@0.53.0':
+    resolution: {integrity: sha512-OgUUxjMTipJy1Hk32vVk6T0dpkxVNtaotX90xmrc4fKyo7AH/Efvz4GbY35YxcgVwtC5SYdolrQ0zwH6i2Tz1A==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -523,24 +523,24 @@ packages:
       async-browser-context:
         optional: true
 
-  '@mark1russell7/rigor-generators@0.2.0':
-    resolution: {integrity: sha512-eTyJhK4Nowx1KQ3QrsQqLiAlhFoL+8m1OT6He+X0Lf0G/0f9OyQC8ponQLViQKRkP/ef10B6oACFjtjnKErobg==}
-    engines: {node: '>=22'}
-
   '@mark1russell7/rigor-generators@0.2.4':
     resolution: {integrity: sha512-9eem6sh2XT0dEqhtDhJTeJWlY9vWsmiEG9hwTcQwdt+MF1jTALHjEzJqvkRP9DwdvGRAoMYBnXfo1kavTkqzMg==}
     engines: {node: '>=22'}
 
-  '@mark1russell7/rigor-statistics@0.2.19':
-    resolution: {integrity: sha512-zMfirguRPEJin3H1q5Rl3kCl6b5M5QSg0ukd/damhZXPwLEUQ/oAYXoRAJA5sSZ7tHW4wZF9DhK8FidiMGsbbg==}
+  '@mark1russell7/rigor-generators@0.2.5':
+    resolution: {integrity: sha512-YoOAjjypZv76QtJ6SMEySljVoZdMDSQdGD7vUQXM/O43d18nW4AyEUOlfqNQSw4cmmML0646TNXktlIhNDjKuw==}
     engines: {node: '>=22'}
 
   '@mark1russell7/rigor-statistics@0.2.25':
     resolution: {integrity: sha512-rYx7IHbt2VD1x/Eo12VcxS3rskiYQu8ZUJY3eKanDBSMe4eUeWFyK1ILB35FvduBZkxRUdkfesXvnpcO6fdWJg==}
     engines: {node: '>=22'}
 
-  '@mark1russell7/site-pages@0.8.4':
-    resolution: {integrity: sha512-pC0qcQqIsfQg5jTg+peUP/DGBXb4d1PQYiu6TCeCE1ALc5X8nyGhj9vMYKBCdhK7uHm8Chtx7INLKPWPmxpK3w==}
+  '@mark1russell7/rigor-statistics@0.2.28':
+    resolution: {integrity: sha512-djrJVWmgGIujKFcQOwzgQXpS61RqD838+Plf7CpWU4ToDAdZjhQtPCWI9TVX5oEbzFJZuHcDNJvlzqXcjaSgSQ==}
+    engines: {node: '>=22'}
+
+  '@mark1russell7/site-pages@0.8.6':
+    resolution: {integrity: sha512-WX/2Sna3H1bzLSleYuKQYuzrLF7kQjSMG79Pnysw0v1mNga95t18bS82u/zfQksPiZSicXSLmR+ye5YHfYNx4w==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -555,8 +555,8 @@ packages:
     engines: {node: '>=22.12'}
     hasBin: true
 
-  '@mark1russell7/text@0.0.18':
-    resolution: {integrity: sha512-sIOsTkBOhWLSDyE4qKyiokUT84NPJgPuhLPDyh2Y+mjGnNbGhF9Q6dt9NnSBtSW8C1D0rZfx8fPJ53g0gQGWfQ==}
+  '@mark1russell7/text@0.0.19':
+    resolution: {integrity: sha512-pPJV318wzfEcsnnzlqVu+OBp/o9VLKWsAo1Wkf4rNaerOjgINDo+vErhmtPVQw6BzcVmGn4brXmMLcosCT9sAw==}
     engines: {node: '>=22.12'}
 
   '@napi-rs/wasm-runtime@1.2.6':
@@ -1779,13 +1779,13 @@ snapshots:
     dependencies:
       '@braidai/lang': 1.1.2
 
-  '@mark1russell7/api-report@0.5.20':
+  '@mark1russell7/api-report@0.5.21':
     dependencies:
-      '@mark1russell7/conventions': 0.52.0
+      '@mark1russell7/conventions': 0.53.0
 
-  '@mark1russell7/conventions@0.52.0':
+  '@mark1russell7/conventions@0.53.0':
     dependencies:
-      '@mark1russell7/text': 0.0.18
+      '@mark1russell7/text': 0.0.19
       yaml: 2.9.1
 
   '@mark1russell7/cue@https://codeload.github.com/mark1russell7/cue/tar.gz/0584cc4212b5ef261a4eefc0735bc0309d6aa073': {}
@@ -1798,21 +1798,21 @@ snapshots:
     optionalDependencies:
       '@opentelemetry/api': 1.10.0
 
-  '@mark1russell7/rigor-generators@0.2.0': {}
-
   '@mark1russell7/rigor-generators@0.2.4': {}
 
-  '@mark1russell7/rigor-statistics@0.2.19':
-    dependencies:
-      '@mark1russell7/rigor-generators': 0.2.0
+  '@mark1russell7/rigor-generators@0.2.5': {}
 
   '@mark1russell7/rigor-statistics@0.2.25':
     dependencies:
       '@mark1russell7/rigor-generators': 0.2.4
 
-  '@mark1russell7/site-pages@0.8.4':
+  '@mark1russell7/rigor-statistics@0.2.28':
     dependencies:
-      '@mark1russell7/rigor-statistics': 0.2.19
+      '@mark1russell7/rigor-generators': 0.2.5
+
+  '@mark1russell7/site-pages@0.8.6':
+    dependencies:
+      '@mark1russell7/rigor-statistics': 0.2.25
 
   '@mark1russell7/ste-lint@https://codeload.github.com/mark1russell7/ste-lint/tar.gz/f597d6c1e09bcfcb487bb575825d6d5f29e9e0c7':
     dependencies:
@@ -1822,7 +1822,7 @@ snapshots:
     dependencies:
       '@clack/prompts': 1.8.1
 
-  '@mark1russell7/text@0.0.18': {}
+  '@mark1russell7/text@0.0.19': {}
 
   '@napi-rs/wasm-runtime@1.2.6(@emnapi/core@2.0.0-beta.2)(@emnapi/runtime@2.0.0-beta.2)':
     dependencies:
